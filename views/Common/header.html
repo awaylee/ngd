@@ -1,0 +1,123 @@
+
+<script src="${.site_root}/static/js/changePwd.js"></script>
+<script src="${.site_root}/static/js/sysConfig.js"></script>
+
+<div class="header">
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">${.SiteName}</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+                <ul class="nav navbar-nav">
+                    <li class='${if eq .CurController "home"} active ${end}'><a href="/">拓扑</a></li>
+                    <li class='${if eq .CurController "alarm"} active ${end}'>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">告警<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="/alarm">告警1</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">告警2</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">告警3</a></li>
+                        </ul>
+                    </li>
+                    <li class='${if eq .CurController "websocket"} active ${end}'><a href="/websocket">WebSocket</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-sm">
+                    <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="userName">${.user.UserName}<span
+                            class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">用户信息</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#changePwdModal">修改密码</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#sysConfigModal">系统配置</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/${.user.Id}/logout">退出</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!-- 修改密码的模态层 -->
+<div class="modal fade" id="changePwdModal" tabindex="-1" role="dialog" aria-labelledby="changePwdModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="changePwdModalLabel">修改密码</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="oldPwd">原始密码</label>
+                        <input type="password" class="form-control" id="oldPwd" placeholder="请输入原始密码" v-model="user.oldPwd">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPwd">新密码</label>
+                        <input type="password" class="form-control" id="newPwd" placeholder="请输入新密码" v-model="user.newPwd">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPwd">确认密码</label>
+                        <input type="password" class="form-control" id="confirmPwd" placeholder="请输入确认密码" v-model="user.confirmPwd">
+                    </div>
+                    <div class="form-group tip">
+                        <div class="input-group">
+                            <span v-bind:class="tipClass">{{tip}}</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" v-on:click="changePwd">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- 系统配置的模态层 -->
+<div class="modal fade" id="sysConfigModal" tabindex="-1" role="dialog" aria-labelledby="sysConfigModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="sysConfigModalLabel">系统配置</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="ipAddress">IP地址</label>
+                        <input type="text" class="form-control" id="ipAddress" placeholder="请输入IP地址" style="width: 100%" v-model="sysConfig.ipAddress">
+                    </div>
+                    <div class="form-group">
+                        <label for="port">端口号</label>
+                        <input type="text" class="form-control" id="port" placeholder="请输入端口号" style="width: 100%" v-model="sysConfig.port">
+                    </div>
+                    <div class="form-group tip">
+                        <div class="input-group">
+                            <span v-bind:class="tipClass">{{tip}}</span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" v-on:click="saveSysConfig">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

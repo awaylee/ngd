@@ -1,0 +1,179 @@
+<link rel="stylesheet" href="${.site_root}/static/libs/diquick/css/diquick.css">
+<link rel="stylesheet"  href="${.site_root}/static/libs/bootstrap/css/bootstrap-table.css">
+<link rel="stylesheet" href="${.site_root}/static/libs/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" href="${.site_root}/static/css/home.css">
+
+<script type="text/javascript" src="${.site_root}/static/libs/qunee/qunee-min.js"></script>
+<script type="text/javascript" src="${.site_root}/static/libs/artTemplate/artTemplate.js"></script>
+<script type="text/javascript" src="${.site_root}/static/libs/qunee/qunee-commons.js"></script>
+<script type="text/javascript" src="${.site_root}/static/libs/bootstrap/js/bootstrap-table.js"></script>
+<script type="text/javascript" src="${.site_root}/static/libs/bootstrap/js/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript" src="${.site_root}/static/libs/bootstrap/js/bootstrap-table-toolbar.js"></script>
+<script type="text/javascript" src="${.site_root}/static/libs/diquick/js/diquick.js"></script>
+<script type="text/javascript" src="${.site_root}/static/libs/echarts/echarts.js"></script>
+<script type="text/javascript" src="${.site_root}/static/js/home.js"></script>
+
+<div title="网络视图" id="graph_panel" class="q-panel">
+    <div id="toolbar" class="q-toolbar" style="display: inline-flex;"></div>
+    <div id="canvas_panel" class="q-content">
+        <div id="canvas" class="q-canvas"></div>
+        <div id="toolbox"></div>
+    </div>
+</div>
+
+<div id="export_panel" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 style="text-align: center;">图片导出预览</h3>
+                <div>
+                    <label>画布大小</label>
+                    <span id="canvas_size"></span>
+                </div>
+                <div style="text-align: center;" title="双击选择全画布范围">
+                    <div id="export_canvas" style="position: relative; display: inline-block;">
+                    </div>
+                </div>
+                <div>
+                    <label>导出范围</label>
+                    <span id="export_bounds"></span>
+                </div>
+                <div>
+                    <label>缩放比例:
+                        <input id="export_scale" type="range" value="1" step="0.2" min="0.2" max="3">
+                        <span id="export_scale_label">1</span>
+                    </label>
+                </div>
+                <div>
+                    <label>输出大小: </label>
+                    <span id="export_size">809 X 556</span>
+                </div>
+                <div style="text-align: right">
+                    <button type="submit" id="export_submit">导出</button>
+                    <button type="submit" id="print_submit">打印</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="q-details-info" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-title"></div>
+            <div class="modal-body">
+                <div class="errorMsg"></div>
+                <div class="content"></div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>
+
+
+<!--节点基本信息-->
+<script type="text/html" id="nodeInfo">
+    <div class="edgeBox">
+        <ul class="box-advance list1">
+          {{each list as val}}
+            <li>
+                <div class="form-group nodeList">
+                    <div class="input-group">
+                        <div class='input-group-addon'>{{val.name}}</div>
+                        <span class='form-control aClick'>{{val.value}}</span>
+                    </div>
+                </div>
+            </li>
+          {{/each}}
+        </ul>
+    </div>
+</script>
+
+<!--连线信息中的节点-->
+<script type="text/html" id="lineInfo">
+    <ul class='box-advance list2'>
+      {{each list as val}}
+        <li>
+            <div class='form-group'>
+                <div class='input-group'>
+                    <div class='input-group-addon'>{{val.name}}</div>
+                    <span class='form-control aClick'>{{val.value}}</span>
+                </div>
+            </div>
+        </li>
+      {{/each}}
+    </ul>
+    <div class="tab">
+        <ul class="nav nav-tabs" role='tablist'>
+            <li data-target="tab" class="active">连线信息</li>
+            <li data-target="tab">告警详情</li>
+        </ul>
+        <div class="content tab-content">
+            <div class="tab-pane active" role="tabpanel">
+                <div class='toolbar btn-toolbar'>
+                    <div class='btn-group' role='group'>
+                        <button class='btn btn-primary add'>
+                            <span class='glyphicon glyphicon-plus'>新增</span>
+                        </button>
+                        <button class='btn btn-danger delete'>
+                            <span class='glyphicon glyphicon-remove'>删除</span>
+                        </button>
+                    </div>
+                </div>
+                <table class="tables"></table>
+            </div>
+
+            <div class="tab-pane" role="tabpanel">
+                <div id='main' style='width: 564px;height: 400px'></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<!--新增连线模板-->
+<script type="text/template" id="addTr">
+    <tr class='addTr'>
+        <td><input type='checkbox'></td>
+        <td><input type='text' class='left_port form-control' data-toggle='tooltip' data-placement='top' title='端口号请输入0到65535的整数'></td>
+        <td><input type='text' class='right_port form-control' data-toggle='tooltip' data-placement='top' title='端口号请输入0到65535的整数'></td>
+        <td><input type='text' class='protocol form-control' data-toggle='tooltip' data-placement='top' title='请输入通信协议'></td>
+        <td>
+            <div class='btn-group' role='group'>
+                <button class='btn btn-xs btn-success sure'><span class='glyphicon glyphicon-ok'></span>确定</button>
+                <button class='btn btn-xs btn-danger cancel'><span class='glyphicon glyphicon-remove'></span>取消</button>
+            </div>
+        </td>
+    </tr>
+</script>
+
+<!--编辑、删除按钮-->
+<script type="text/html" id="editBtn">
+    <div class='btn-group' role='group'>
+        <button class='btn btn-xs btn-success edit'><span class='glyphicon glyphicon-edit'></span>编辑</button>
+        <button class='btn btn-xs btn-danger remove'><span class='glyphicon glyphicon-remove'></span>删除</button>
+    </div>
+</script>
+
+<!--添加连线-->
+<script type="text/html" id="addEdgeUI">
+    <div class='edgeBox relative'>
+        <ul class='box-advance list1'>
+          {{each list as value}}
+            <li>
+                <div class='form-group'>
+                    <div class='input-group'>
+                        <div class='input-group-addon'>{{value}}</div>
+                        <input class='form-control' type='text'>
+                    </div>
+                </div>
+            </li>
+          {{/each}}
+        </ul>
+        <div class="addNew">
+            <span class="glyphicon glyphicon-plus addBtn"></span>
+            <span class="glyphicon glyphicon-minus removeBtn"></span>
+        </div>
+
+    </div>
+</script>
+

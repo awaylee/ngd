@@ -1,0 +1,90 @@
+body {
+    color: #fff1f0;
+}
+
+.page-container {
+    position: absolute;
+    text-align: center;
+    background: #ADADAD;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    margin: -180px 0 0 -250px;
+    border: 15px solid #e3e3e3;
+    font-size: 12px;
+    border-radius: 2px;
+}
+
+.login-header {
+    margin-top: 10px;
+    font-size: 30px;
+}
+
+.login-body {
+
+}
+
+.login-footer {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.login-body form {
+    width: 305px;
+    margin: 15px auto 0 auto;
+    text-align: center;
+}
+
+.login-body input {
+    width: 270px;
+    height: 38px;;
+    border: 0;
+}
+
+.login-body #authCode {
+    width: 60px;
+    height: 30px;
+    text-indent: 12px;
+    font-size: 12px;
+    color: #9d9d9d;
+}
+
+.login-body #authNumber {
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.login-body #remember {
+    width: 14px;
+    height: 14px;
+    margin-left: 10px;
+}
+
+.login-body .condition {
+    text-align: left;
+    white-space: nowrap;
+}
+
+.login-body .refresh {
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    vertical-align: bottom;
+}
+
+.login-body .errorMsg {
+    width: 311px;
+    border: 0;
+    color: red;
+}
+
+.login-body button {
+    width: 311px;
+    color: #fff;
+}
+.input-group .authNumber{
+    display:inline-block;
+    width: 58px;
+    font-size: 18px;
+    text-align: center;
+}

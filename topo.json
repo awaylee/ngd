@@ -1,0 +1,167 @@
+{
+    "nodes": [
+        {
+            "id": 1,
+            "name": "服务器",
+            "type" : 1,
+            "ip_v4" : "192.168.1.100"
+
+        },
+        {
+            "id": 2,
+            "name": "交换机A",
+            "type" : 2,
+            "ip_v4" : "192.168.1.10",
+            "parent": 1
+        },
+        {
+            "id": 3,
+            "name": "主机B",
+            "type" : 0,
+            "ip_v4" : "192.168.1.20",
+            "parent": 1
+        },
+        {
+            "id": 4,
+            "name": "主机C",
+            "type" : 0,
+            "ip_v4" : "192.168.1.30",
+            "parent": 1
+        },
+        {
+            "id": 5,
+            "name": "主机D",
+            "type" : 0,
+            "ip_v4" : "192.168.1.40",
+            "parent": 1
+        },
+        {
+            "id": 6,
+            "name": "主机E",
+            "type" : 0,
+            "ip_v4" : "192.168.1.50",
+            "parent": 2
+        },
+        {
+            "id": 7,
+            "name": "主机F",
+            "type" : 0,
+            "ip_v4" : "192.168.1.60",
+            "parent": 2
+        },
+        {
+            "id": 8,
+            "name": "主机G",
+            "type" : 0,
+            "ip_v4" : "192.168.1.70",
+            "parent": 2
+        },
+        {
+            "id": 9,
+            "name": "主机H",
+            "type" : 0,
+            "ip_v4" : "192.168.1.80",
+            "parent": 2
+        }
+    ],
+    "lines": [
+        {
+            "id" : 1,
+            "left": 1,
+            "right": 2
+        },
+        {
+            "id" : 2,
+            "left": 1,
+            "right": 3
+        },
+        {
+            "id" : 3,
+            "left": 1,
+            "right": 4
+        },
+        {
+            "id" : 4,
+            "left": 1,
+            "right": 5
+        },
+        {
+            "id" : 5,
+            "left": 2,
+            "right": 6
+        },
+        {
+            "id" : 6,
+            "left": 2,
+            "right": 7
+        },
+        {
+            "id" : 7,
+            "left": 2,
+            "right": 8
+        },
+        {
+            "id" : 8,
+            "left": 2,
+            "right": 9
+        }
+    ],
+    "line_ports" : [
+        {
+            "id" : 1,
+            "line_id" : 1,
+            "left_port" : 8080,
+            "right_port" : 9090,
+            "protocol" : "tcp"
+        },
+        {
+            "id" : 2,
+            "line_id" : 2,
+            "left_port" : 8080,
+            "right_port" : 99,
+            "protocol" : "udp"
+        },
+        {
+            "id" : 3,
+            "line_id" : 3,
+            "left_port" : 20,
+            "right_port" : 40,
+            "protocol" : "ssh"
+        },
+        {
+            "id" : 4,
+            "line_id" : 4,
+            "left_port" : 66,
+            "right_port" : 1234,
+            "protocol" : "zmq"
+        },
+        {
+            "id" : 5,
+            "line_id" : 5,
+            "left_port" : 66,
+            "right_port" : 99,
+            "protocol" : "socket"
+        },
+        {
+            "id" : 6,
+            "line_id" : 6,
+            "left_port" : 866,
+            "right_port" : 433,
+            "protocol" : "scp"
+        },
+        {
+            "id" : 7,
+            "line_id" : 7,
+            "left_port" : 126,
+            "right_port" : 6522,
+            "protocol" : "x11"
+        },
+        {
+            "id" : 8,
+            "line_id" : 8,
+            "left_port" : 80,
+            "right_port" : 111,
+            "protocol" : "syslog"
+        }
+    ]
+}

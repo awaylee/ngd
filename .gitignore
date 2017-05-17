@@ -1,0 +1,11 @@
+.idea/
+
+ngd.db
+
+# 可执行文件
+*.exe
+NGD-Web**
+
+# 注解自动生成路由相关文件
+app/routers/commentsRouter_**.go
+*.tmp

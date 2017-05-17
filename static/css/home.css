@@ -1,0 +1,211 @@
+#graph_panel {
+    height: 100%;
+}
+
+.tabs-panels .panel-body{
+    border-left: solid 1px #DDD;
+    border-right: solid 1px #DDD;
+}
+
+.tree-node {
+    height: 20px;
+}
+
+.q-panel {
+    padding-top: 40px;
+    position: relative;
+}
+
+.q-toolbar {
+    padding: 5px;
+}
+
+.q-panel .q-toolbar {
+    position: absolute;
+    top: 0;
+    height: 40px;
+    width: 100%;
+    z-index: 1;
+}
+.q-panel .q-content {
+    height: 100%;
+    background-color: #FFF;
+    overflow: hidden;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    position: relative;
+}
+
+.q-panel .btn, .q-panel .btn:not(.line):not(:first-of-type) {
+    background-color: inherit;
+    padding: 5px 10px;
+    width: inherit;
+    color: inherit;
+    margin-left: 0;
+    margin-right: -1px;
+}
+
+.q-canvas {
+    height: 100%;
+}
+
+#canvas_panel {
+    position: relative;
+    overflow: hidden;
+}
+
+#canvas {
+    width: 100%;
+    background-color: #FFF;
+    outline: none;
+    overflow: hidden;
+}
+
+#toolbar {
+    background-color: #F8F8F8;
+    border-bottom: solid 1px #DDD;
+    padding: 5px;
+}
+
+#toolbar .btn, #toolbar .btn-group {
+    margin-right: 5px;
+}
+
+#toolbar .btn-group .btn {
+    margin: 0 0 0 -1px !important;
+}
+
+#toolbar input[type=text] {
+    min-height: inherit !important;
+}
+
+#toolbox {
+    position: absolute;
+    top: 0px;
+    background-color: #F8F8F8;
+    padding: 5px;
+}
+
+#toolbox > img, #toolbox > button {
+    display: block;
+    padding: 10px 10px 10px 10px;
+    border-radius: 0px;
+}
+
+#toolbox > span {
+    display: block;
+    text-align: center;
+    font-size: 12px;
+}
+
+.layout-split-west {
+    border-right: 5px solid rgba(255, 255, 255, 0);
+}
+
+#center_panel {
+    border: none;
+}
+
+.panel {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+#footer {
+    text-align: center;
+    padding: 8px;
+    border-top: solid 1px #DDD;
+    background-color: #EEE;
+}
+
+#q-details-info .modal-title {
+    font-size: 16px;
+    margin: 10px 10px;
+}
+
+.modal-footer button {
+    margin-right: 10px;
+    padding: 8px 15px;
+    border-radius: 5px;
+}
+
+.modal-body input[type=text] {
+    /*width: 130px;*/
+    /*margin-top: 10px;*/
+}
+.modal-body .node_title{
+    padding: 10px 0;
+    font-size: 16px;
+}
+.content>.tab>ul.nav>li{
+    width:98px;
+}
+.aClick{
+    cursor: pointer;
+}
+.alarmContent{
+    min-height: 106px;
+}
+.content>.tab-pane{
+    padding:10px;
+}
+.tab .content .fixed-table-toolbar{
+    margin-top:-10px;
+}
+.modal-body{
+    margin-top:-15px;
+}
+.fixed-table-body tbody tr td{
+    text-align: center;
+    vertical-align: middle;
+}
+.fixed-table-body tr td input[type=text]{
+    width: 100%;
+    margin-top:0;
+    text-align: center;
+}
+.edgeBox{
+    padding:10px 30px;
+    border: 1px solid #e3e3e3;
+}
+tr[data-index] input[disabled]{
+    border: none;
+    background: none;
+}
+.errorMsg{
+    color: red;
+}
+.list1 .input-group{
+    display: flex;
+}
+.list1 .input-group-addon{
+    width: 130px;
+}
+.relative{
+    position: relative;
+}
+.addNew{
+    position: absolute;
+    bottom: 5px;
+    right:30px;
+    color: #555;
+    cursor: pointer;
+}
+.addNew span{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 24px;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    border-radius: 50%;
+}
+.addNew span:hover{
+    background-color: #449d44;
+    border-color: #398439;
+}
+.edgeBox +.edgeBox{
+    margin-top: 15px;
+}

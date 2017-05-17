@@ -1,0 +1,304 @@
+<link rel="stylesheet" href="${.site_root}/static/css/forgot.css">
+<script type="text/javascript" src="${.site_root}/static/js/jquery/jquery.js"></script>
+
+<div class="header">
+    <div class="header_container">
+        <div class="header_left">
+            <div class="logo">
+                logo
+            </div>
+            <div class="reset">
+                <a href="/reset">重置密码</a>
+            </div>
+        </div>
+        <div class="header_right">
+            <a href="/login">登录</a>
+        </div>
+    </div>
+</div>
+<div class="section">
+    <div class="section_nav">
+        <ul class="nav_process">
+            <li>
+                <div>
+                    <i>1</i>
+                    <p>填写账号</p>
+                </div>
+                <i></i>
+            </li>
+            <li>
+                <div>
+                    <i>2</i>
+                    <p>身份验证</p>
+                </div>
+                <i></i>
+            </li>
+            <li>
+                <div>
+                    <i>3</i>
+                    <p>设置新密码</p>
+                </div>
+                <i></i>
+            </li>
+            <li class="last">
+                <div>
+                    <i>4</i>
+                    <p>完成</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="section_main">
+    <!--step1-->
+    <div class="main_form step1">
+        <form>
+            <div class="form_block">
+                <div class="label_box">
+                    <label>账号:</label>
+                </div>
+                <div class="form_block_box">
+                    <div class="input_box">
+                        <input type="text" id="username" placeholder="用户名">
+                    </div>
+                    <div class="tips user_tips"></div>
+                </div>
+            </div>
+            <div class="form_block">
+                <div class="label_box">
+                    <label>验证码：</label>
+                </div>
+                <div class="form_block_box">
+                    <div class="code_box">
+                        <input type="text" id="authCode" placeholder="验证码">
+                        <span class="code code1">A3F8</span>
+                        <span class="change">换一张</span>
+                    </div>
+                    <div class="tips code_tips"></div>
+                </div>
+            </div>
+            <div>
+                <a class="sure sure1" href="javascript:;">确&nbsp;定</a>
+            </div>
+        </form>
+    </div>
+
+    <!--step2-->
+    <div class="main_form step2">
+        <form>
+            <div class="form_block">
+                <div class="label_box">
+                    <label>请输入您的邮箱/手机号:</label>
+                </div>
+                <div class="form_block_box">
+                    <div class="input_box">
+                        <input type="text" id="tel" placeholder="注册时使用的手机号或邮箱">
+                    </div>
+                    <div class="tips tel_tips"></div>
+                </div>
+            </div>
+
+            <div>
+                <a class="sure sure2" href="javascript:;">下一步</a>
+            </div>
+        </form>
+    </div>
+
+    <!--step3-->
+    <div class="main_form step3">
+        <form>
+            <div class="form_block">
+                <div class="label_box">
+                    <label>设置新密码:</label>
+                </div>
+                <div class="form_block_box">
+                    <div class="input_box">
+                        <input type="password" id="newpsw" placeholder="请输入新密码">
+                    </div>
+                    <div class="tips psw_tips"></div>
+                </div>
+            </div>
+            <div class="form_block">
+                <div class="label_box">
+                    <label>确认新密码:</label>
+                </div>
+                <div class="form_block_box">
+                    <div class="input_box">
+                        <input type="password" id="repsw" placeholder="请确认新密码">
+                    </div>
+                    <div class="tips repsw_tips"></div>
+                </div>
+            </div>
+            <div class="form_block">
+                <div class="form_block_box">
+                    <div class="label_box">
+                        <label>验证码：</label>
+                    </div>
+                    <div class="code_box">
+                        <input type="text" id="pswCode" placeholder="验证码">
+                        <span class="code code3">9GH3</span>
+                        <span class="change">换一张</span>
+                    </div>
+                    <div class="tips code_tips2"></div>
+                </div>
+            </div>
+            <div>
+                <a class="sure sure3" href="javascript:;">下一步</a>
+            </div>
+        </form>
+    </div>
+
+    <!--step4-->
+    <div class="main_form step4">
+        <form>
+            <div class="form_block">
+                <div class="info_tip"></div>
+            </div>
+
+            <div style="text-align: center">
+                <a class="sure sure4" href="javascript:;">完&nbsp;成</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    var storage = window.localStorage;
+    $(function () {
+        if (storage.status == "step1" || !storage.status) {
+            $('.step1').show();
+            $('.nav_process li:nth-of-type(1)').addClass('active');
+        }
+        else if (storage.status == "step2") {
+            $('.step2').show();
+            $('.nav_process li:nth-of-type(1)').addClass('active');
+            $('.nav_process li:nth-of-type(2)').addClass('active');
+        }
+        else if (storage.status == "step3") {
+            $('.step3').show();
+            $('.nav_process li:nth-of-type(1)').addClass('active');
+            $('.nav_process li:nth-of-type(2)').addClass('active');
+            $('.nav_process li:nth-of-type(3)').addClass('active');
+        }
+        else if (storage.status == "step4") {
+            $('.step4').show();
+            $(".info_tip").show();
+            $('.nav_process li').addClass('active');
+        }
+    });
+
+    /*
+     * step1
+     * */
+    //获取焦点
+    $('#username').on('focus', function () {
+        $('.user_tips').hide();
+    });
+
+    //失去焦点
+    $('#username').on('blur', function () {
+        var value = $('#username').val();
+        if (value == '') {
+            $('.user_tips').show().text('用户名不能为空');
+        }
+    });
+
+    //确定
+    $('.sure1').on('click', function () {
+        var value = $('#username').val();
+        var code = $('.code1').text();//验证码
+        var authCode = $('#authCode').val();//输入的验证码
+        if (value == '') {
+            $('.user_tips').show().text('用户名不能为空');
+        } else {
+            if (authCode.toUpperCase() == code) {
+                $('.step1').hide().siblings('.step2').show();
+                storage['status'] = "step2";
+                $('.nav_process li:nth-of-type(2)').addClass('active');
+            } else {
+                $('.code_tips').show().text('验证码错误，请重新输入');
+            }
+        }
+
+    });
+
+    /*
+     * step2
+     * */
+    $('#tel').on('focus', function () {
+        $('.tel_tips').hide();
+    });
+    //失去焦点
+    $('#tel').on('blur', function () {
+        var value = $('#tel').val();
+        if (value == '') {
+            $('.tel_tips').show().text('邮箱/手机号不能为空');
+        }
+    });
+
+    //下一步
+    $('.sure2').on('click', function () {
+        $('.nav_process li:nth-of-type(3)').addClass('active');
+        storage['status'] = "step3";
+        $('.step2').hide().siblings('.step3').show();
+
+    });
+
+    /*
+     * step3
+     * */
+    //新密码
+    $('#newpsw').on('focus', function () {
+        $('.psw_tips').hide();
+    });
+
+    $('#newpsw').on('blur', function () {
+        var value = $(this).val();
+        if (value == '') {
+            $('.psw_tips').show().text('密码不能为空')
+        } else {
+            //重复密码
+            $('#repsw').on('focus', function () {
+                $('.repsw_tips').hide();
+            });
+
+            $('#repsw').on('blur', function () {
+                var value = $(this).val();
+                if (value == '') {
+                    $('.repsw_tips').show().text('密码不能为空')
+                } else {
+                    var newpsw = $('#newpsw').val();
+                    var repsw = $('#repsw').val();
+                    if (newpsw != repsw) {
+                        $('.repsw_tips').show().text('两次输入的密码不一致')
+                    }
+                }
+            });
+        }
+    });
+
+    //下一步
+    $('.sure3').on('click', function () {
+        var code = $('.code3').text();//验证码
+        var authCode = $('#pswCode').val();//输入的验证码
+        if (authCode.toUpperCase() == code) {
+            $('.nav_process li:nth-of-type(4)').addClass('active');
+            $('.step3').hide().siblings('.step4').show();
+            $(".info_tip").fadeIn('slow');
+        } else {
+            $('.code_tips2').show().text('验证码错误，请重新输入');
+        }
+
+        storage['status'] = "step4";
+    });
+
+    /*
+     * step4
+     * */
+    $('.sure4').on('click', function () {
+        setTimeout('window.location.href = "/login"', 2000);
+        storage.clear();
+    })
+
+</script>

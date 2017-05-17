@@ -1,0 +1,30 @@
+<div class="main_content" id="main_content">
+    用户ID：<input type="text" id="uid" />
+    用户名称：<input type="text" id="uname" />
+    <button onclick="testWebSocket()">click</button>
+</div>
+<div id="output"></div>
+<script type="text/javascript">
+    function testWebSocket() {
+        var wsUri = "ws://"+window.location.host+"/websocket/join"
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function (evt) {
+            console.log("CONNECTED...");
+            console.log("onopen evt: " + evt);
+            websocket.send("onopen");
+        };
+        websocket.onclose = function (evt) {
+            console.log("DISCONNECTED...");
+            console.log("onclose evt: " + evt);
+        };
+        websocket.onmessage = function (evt) {
+            console.log("onmessage...");
+            console.log("onmessage evt: " + evt);
+            //websocket.close();
+        };
+        websocket.onerror = function (evt) {
+            console.log("onerror...");
+            console.log("onerror evt: " + evt);
+        };
+    }
+</script>

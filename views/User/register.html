@@ -1,0 +1,105 @@
+<link rel="stylesheet" href="${.site_root}/static/css/bootstrap/bootstrap.css">
+<link rel="stylesheet" href="${.site_root}/static/css/login.css">
+<script type="text/javascript" src="${.site_root}/static/js/jquery/jquery.js"></script>
+
+<div class="page-container">
+    <div class="login-header">NGD</div>
+    <div class="login-body">
+        <form method="post">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="glyphicon glyphicon-user"></i>
+                    </div>
+                    <input class="form-control" name="account" id="register_name" placeholder="用户名" type="text"
+                           required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="glyphicon glyphicon-lock"></i>
+                    </div>
+                    <input class="form-control" name="passwd" id="register_psw" placeholder="密码" type="password"
+                           required="required">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="glyphicon glyphicon-log-in"></i>
+                    </div>
+                    <input class="form-control" name="repasswd" id="register_repsw" placeholder="重复密码" type="password"
+                           required="required">
+                </div>
+            </div>
+            <div class="form-group condition">
+                <div class="input-group row">
+                    <div class="col-md-6">
+                        <span class="text-center">验证码：</span>
+                        <input id="authCode" placeholder="验证码" type="text">
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <span class="authNumber">A1B2</span>
+                        <span class="refresh">看不清楚?<br>换一张</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="register()"> 注册</button>
+        </div>
+        <div class="row">
+            <div class="col-md-6"><a href="/login">登录账号</a></div>
+        </div>
+    </div>
+    <div class="login-footer">
+        <span class="copyright">Copyright &copy;2016 | 坚果灯塔Team</span>
+    </div>
+</div>
+<script>
+    function register() {
+        var name = $("#register_name").val(),
+            psw = $("#register_psw").val(),
+            repsw = $("#register_repsw").val();
+        if (name == "") {
+            alert("请输入用户名");
+        } else {
+            if (psw == "") {
+                alert("请输入密码");
+            } else {
+                if (psw != repsw) {
+                    alert("两次输入密码不一致，请重新输入！");
+                } else {
+                    var user = getUser(name, psw);
+                    toRegister(user);
+                }
+            }
+        }
+    }
+    //获取用户信息
+    function getUser(name, psw) {
+        var user = {
+            userID: name,
+            password: psw
+        };
+        console.log(user);
+        return user;
+    }
+
+    function toRegister(user) {
+        $.ajax({
+            type: "post",
+            url: "",
+            data: {name: user.userID, passwd: user.password},
+            success: function (data) {
+                if (data == 'true') {
+                    alert('注册成功！');
+                }
+            },
+            error: function (data) {
+                alert("系统故障");
+            }
+        });
+    }
+</script>
